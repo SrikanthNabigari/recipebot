@@ -5,10 +5,10 @@ from scrapy.http import HtmlResponse, Request, Response
 import itertools
 
 class RecipeLink(scrapy.Spider):
-    name = "recipebot"
+    name = "epicuriousrecipebot"
     allowed_domains = ["epicurious.com"]
     start_urls = ["http://www.epicurious.com/search/?special-consideration=vegetarian&page=%s" % \
-                         i for i in xrange(1,10)]    
+                         i for i in xrange(1,10)]    # you can maximize the range to 754
 
     def parse(self, response):
         sites = response.xpath('//a[@class="photo-link"][contains(@href, "/recipes/food/views")]')
@@ -25,7 +25,7 @@ class RecipeLink(scrapy.Spider):
         item = EpicuriousRecipe()
         item['source_name'] = "Epicurious"
         item['source_link'] = "http://www.epicurious.com"
-        item['recipe_link'] = response
+        item['recipe_link'] = response.url
         item['name'] = sel.xpath('//div[@class="title-source"]/h1/text()').extract_first()
         item['image'] = sel.xpath('//img[@class="photo loaded"]/@srcset').extract_first()
         item['desc'] = sel.xpath('//div[@class="dek"]/p/text()').extract_first()

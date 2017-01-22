@@ -23,7 +23,7 @@ class EpicuriousRecipe(scrapy.Item):
 class YummlyRecipe(scrapy.Item):
     source_name = scrapy.Field()
     source_link = scrapy.Field()
-    source_logog = scrapy.Field()
+    source_logo = scrapy.Field()
     recipe_link = scrapy.Field()
     name = scrapy.Field()
     image = scrapy.Field()
@@ -33,3 +33,16 @@ class YummlyRecipe(scrapy.Item):
     author = scrapy.Field()
     nutrition = scrapy.Field()
     servings = scrapy.Field()
+
+class BBCRecipe(scrapy.Item):
+    source_name = scrapy.Field()
+    source_link = scrapy.Field()
+    source_logo = scrapy.Field()
+    recipe_link = scrapy.Field()
+    name = scrapy.Field()
+    image = scrapy.Field()
+    desc = scrapy.Field()
+    ingredients = scrapy.Field()
+    preparation = scrapy.Field()
+    author = scrapy.Field()
+    nutrition = scrapy.Field()

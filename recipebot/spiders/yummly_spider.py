@@ -6,7 +6,7 @@ import itertools
 
 class RecipeLink(scrapy.Spider):
     name = "yummlyrecipebot"
-    allowed_domains = ["yummly.co"]
+    allowed_domains = ["yummly.com"]
     start_urls = ["http://www.yummly.co"]    
 
     def parse(self, response):
@@ -38,11 +38,7 @@ class RecipeLink(scrapy.Spider):
         item['ingredients'] = sel.xpath().extract()
         item['servings'] = sel.xpath('//div[@class="servings"]/label/input/@value').extract()
         item['author'] = sel.xpath('//span[@class="attribution"]/a/text()').extract_first()
-        nutri_label = sel.xpath().extract()
-        nutri_data = sel.xpath().extract()
-        n_l = (s.strip() for s in nutri_label)
-        n_d = (s.strip() for s in nutri_data)
-        item['nutrition'] = dict(zip(n_l,n_d))
+        
         print item
         yield item
 
