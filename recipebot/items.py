@@ -18,7 +18,6 @@ class EpicuriousRecipe(scrapy.Item):
     preparation = scrapy.Field()
     author = scrapy.Field()
     nutrition = scrapy.Field()
-    servings = scrapy.Field()
     
 class YummlyRecipe(scrapy.Item):
     source_name = scrapy.Field()

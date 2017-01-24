@@ -7,9 +7,9 @@ import itertools
 class RecipeLink(scrapy.Spider):
     name = "epicuriousrecipebot"
     allowed_domains = ["epicurious.com"]
-    start_urls = ["http://www.epicurious.com/search/?special-consideration=vegetarian&page=%s" % \
-                         i for i in xrange(1,10)]    # you can maximize the range to 754
-
+    start_urls = ["http://www.epicurious.com/search/?page=%s" % \
+                  x for x in xrange(1,10)]    
+                # you can maximize the range upto 2142
     def parse(self, response):
         sites = response.xpath('//a[@class="photo-link"][contains(@href, "/recipes/food/views")]')
         for sel in sites:
@@ -19,7 +19,7 @@ class RecipeLink(scrapy.Spider):
             url = "http://www.epicurious.com%s" % link
             yield Request(url, callback = self.parseCategory)
 
-    
+ 
     def parseCategory(self,response):
         sel = response
         item = EpicuriousRecipe()
